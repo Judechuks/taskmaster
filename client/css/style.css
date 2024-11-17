@@ -1,0 +1,123 @@
+:root {
+  --primary-clr: rgb(44, 146, 46);
+  --primary-dark-clr: rgb(36, 109, 37);
+  --white-clr: #ececec;
+  --black-clr: #222222;
+  --shadow: 10px 10px 10px -1px rgba(10, 99, 169, 0.16),
+    -10px -10px 10px -1px rgba(205, 205, 205, 0.7);
+  --transparent-border: 1px solid rgba(44, 146, 46, 0.527);
+  --transparent-shadow: 0 3px 10px rgba(44, 146, 46, 0.327);
+  --transparent-primary-clr: rgba(44, 146, 46, 0.327);
+}
+
+/* Resets */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+a {
+  text-decoration: none;
+  color: var(--black-clr);
+}
+li {
+  list-style-type: none;
+}
+h1 {
+  font-size: 1.8rem;
+}
+h2 {
+  font-size: 1.6rem;
+}
+h2 {
+  font-size: 1.4rem;
+}
+p {
+  font-size: 1.1rem;
+}
+
+/* Utilities */
+.wrapper {
+  min-height: 100vh;
+  max-width: 1400px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-rows: 80px 1fr auto;
+  background-color: var(--white-clr);
+}
+.btn {
+  display: inline-block;
+  width: fit-content;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+.btn-primary {
+  transition: 0.5s;
+  color: var(--white-clr);
+  background-color: var(--primary-clr);
+}
+.btn-primary:hover {
+  background-color: var(--primary-dark-clr);
+}
+
+/* Header */
+header {
+  padding: 8px 20px;
+  position: fixed;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--white-clr);
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.384);
+}
+.logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.logo span {
+  color: var(--primary-clr);
+}
+header .btn {
+  padding: 6px 25px;
+}
+
+/* Hero-container */
+.main-container {
+  padding: 8px 20px;
+  grid-row: 2/3;
+}
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 30px;
+}
+.hero h1 {
+  margin-bottom: 20px;
+}
+.hero .btn {
+  margin-top: 20px;
+  text-transform: uppercase;
+}
+.hero img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+/* Footer */
+footer {
+  padding: 8px 20px;
+  text-align: center;
+  color: var(--white-clr);
+  grid-row: 3/4;
+  background-color: var(--primary-dark-clr);
+}
+
+/* Media Query */
+@media (max-width: 890px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}
