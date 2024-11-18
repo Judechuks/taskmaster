@@ -50,14 +50,12 @@ document
     } else if (password !== confirmPassword) {
       displayAlertMessage("Both passwords do not match", "danger");
     } else {
-      const fullName = `${firstName} ${lastName}`;
       const response = await fetch(`${apiUrl}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           firstName,
           lastName,
-          fullName,
           email,
           password,
         }),
