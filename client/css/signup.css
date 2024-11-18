@@ -26,7 +26,9 @@
   cursor: pointer;
   color: var(--text-clr);
 }
-.input-field input {
+.input-field input,
+.input-field select,
+.input-field textarea {
   display: block;
   width: 100%;
   margin-top: 4px;
@@ -87,6 +89,34 @@
   background-color: var(--primary-dark-clr);
 }
 
-/* Responsiveness - Media Query */
-@media screen and (max-width: 290px) {
+/* New task form styles */
+.input-field select {
+  cursor: pointer;
+  appearance: none; /* removes the default caret icon*/
+  /* To add personal dropdown icon */
+}
+.input-field textarea {
+  resize: none;
+}
+.submitBtn-container {
+  margin-top: 30px;
+}
+.submitBtn-container .btn {
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--white-clr);
+}
+.save-btn {
+  background-color: #1b6d2e;
+}
+.save-btn:hover {
+  background-color: #155724;
+}
+.cancel-btn {
+  background-color: #6d1b2e;
+}
+.cancel-btn:hover {
+  background-color: #571524;
 }
