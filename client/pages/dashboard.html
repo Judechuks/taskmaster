@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - TaskMaster</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="../../../../../JAY CEE/MY WORK/WEB/Assets/fontawesome-free-6.1.1-web/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/signup.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <script defer src="../js/script.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="../index.html" class="logo">
+          Task<span class="brand-span">Master</span>
+        </a>
+        <nav>
+          <a href="/logout" class="btn logout-btn">logout</a>
+          <div class="hamburger">
+            <div class="bar"></div>
+          </div>
+        </nav>
+      </header>
+      <!-- Alert - for alert message -->
+      <article class="alert-container">
+        <p class="text">This is the alert message</p>
+        <div class="progress"></div>
+      </article>
+      <!-- Main Container -->
+      <main class="main-container">
+        <section class="col-1">
+          <nav class="sidebar">
+            <div class="sidebar-content">
+              <div class="flex-gap">
+                <div class="profile-pic">
+                  <img src="../assets/profile-pic.png" alt="profile" />
+                </div>
+                <div class="profile-detail">
+                  <p class="profile-name">User's Full name</p>
+                  <p class="profile-email">user's_emailaddress@gmail.com</p>
+                </div>
+              </div>
+              <div class="categories">
+                <div class="flex-between">
+                  <span class="category-text">All Tasks</span>
+                  <span class="quantity">25</span>
+                </div>
+                <div class="flex-between">
+                  <span class="category-text">Uncompleted Tasks</span>
+                  <span class="quantity">10</span>
+                </div>
+                <div class="flex-between">
+                  <span class="category-text">Completed Tasks</span>
+                  <span class="quantity">15</span>
+                </div>
+              </div>
+              <div class="">
+                <a href="/logout" class="btn logout-btn">logout</a>
+              </div>
+            </ class="sidebar-content">
+          </nav>
+        </section>
+        <section class="col-2">
+          <article>
+            <div class="header">
+              <div>
+                <h2>Welcome user</h2>
+                <p>Monday, 18 November</p>
+              </div>
+              <aside>
+                <p>All Tasks</p>
+              </aside>
+            </div>
+            <div class="body">
+              <div>
+                <button class="add-task-btn">
+                  <i class="fa fa-plus"></i> add a task
+                </button>
+
+                <table id="taskTable">
+                  <tr>
+                    <td>Task 5</td>
+                  </tr>
+                  <tr>
+                    <td>Task 4</td>
+                  </tr>
+                  <tr>
+                    <td>Task 3</td>
+                  </tr>
+                  <tr>
+                    <td>Task 2</td>
+                  </tr>
+                  <tr>
+                    <td>Task 1</td>
+                  </tr>
+                  <tr>
+                    <td>Task 1</td>
+                  </tr>
+                  <tr>
+                    <td>Task 1</td>
+                  </tr>
+                  <tr>
+                    <td>Task 1</td>
+                  </tr>
+                  <tr>
+                    <td>Task 1</td>
+                  </tr>
+                  <tr>
+                    <td>Task 1</td>
+                  </tr>
+                  <tr>
+                    <td>Task 1</td>
+                  </tr>
+                  <tr>
+                    <td>Task 1</td>
+                  </tr>
+                  <tr>
+                    <td>Task 1</td>
+                  </tr>
+                  <tr>
+                    <td>Task 1</td>
+                  </tr>
+                  <tr>
+                    <td>Task 1</td>
+                  </tr>
+                  <tr>
+                    <td>Task 1</td>
+                  </tr>
+                  <tr>
+                    <td>Task 1</td>
+                  </tr>
+                  <tr>
+                    <td>Task 1</td>
+                  </tr>
+                  <tr>
+                    <td>Task 1</td>
+                  </tr>
+                  <tr>
+                    <td>Task 1</td>
+                  </tr>
+                  <tr>
+                    <td>Task 1</td>
+                  </tr>
+                  <tr>
+                    <td>Task 1</td>
+                  </tr>
+                  <tr>
+                    <td>Task 1</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </article>
+        </section>
+        <!-- New Task Form Container-->
+        <section class="task-form-container">
+          <!-- New Task Form -->
+          <form id="task-form">
+            <h2>New Task</h2>
+            <div class="input-field">
+              <label for="task-title" class="input-label">Title</label>
+              <input
+                type="text"
+                id="task-title"
+                placeholder="Enter task title"
+                required />
+            </div>
+            <div class="input-field">
+              <label for="task-description" class="input-label"
+                >Description</label
+              >
+              <textarea
+                id="task-description"
+                rows="6"
+                placeholder="Enter task description here"></textarea>
+            </div>
+            <div class="input-field">
+              <label for="task-priority" class="input-label">Priority</label>
+              <select id="task-priority" required>
+                <option selected disabled>Choose priority</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+            <div class="submitBtn-container">
+              <button type="submit" class="btn save-btn">Save Task</button>
+              <button type="button" class="btn cancel-btn">Cancel</button>
+            </div>
+          </form>
+        </section>
+      </main>
+      <footer>
+        <p>Made by Judechuks</p>
+      </footer>
+    </div>
+  </body>
+</html>
