@@ -38,6 +38,7 @@
       </article>
       <!-- Main Container -->
       <main class="main-container">
+        <!-- Col-1's Content -->
         <section class="col-1">
           <nav class="sidebar">
             <div class="sidebar-content">
@@ -67,101 +68,74 @@
               <div class="">
                 <a href="/logout" class="btn logout-btn">logout</a>
               </div>
-            </ class="sidebar-content">
+            </div>
           </nav>
         </section>
+
+        <!-- Col-2's Content -->
         <section class="col-2">
           <article>
             <div class="header">
               <div>
-                <h2>Welcome user</h2>
-                <p>Monday, 18 November</p>
+                <h2>Welcome, User</h2>
+                <p>
+                  <i class="fa fa-calendar"></i>
+                  <span id="tellDate">Monday, 18 November</span>
+                </p>
               </div>
               <aside>
                 <p>All Tasks</p>
               </aside>
             </div>
+
+            <!-- Col-2's Body -->
             <div class="body">
               <div>
                 <button class="add-task-btn">
-                  <i class="fa fa-plus"></i> add a task
+                  <i class="fa fa-plus"></i> add a new task
                 </button>
-
                 <table id="taskTable">
                   <tr>
-                    <td>Task 5</td>
+                    <td>
+                      <div class="content">
+                        Creating a fullstack task management app with HTML, CSS,
+                        JavaScript, NodeJS, ExpressJS and MongoDB
+                      </div>
+                      <aside class="task-action-container">
+                        <button type="button" class="done-btn">
+                          <i class="far fa-square-check"></i>
+                        </button>
+                        <button type="button" class="edit-btn">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button type="button" class="delete-btn">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </aside>
+                    </td>
                   </tr>
                   <tr>
-                    <td>Task 4</td>
-                  </tr>
-                  <tr>
-                    <td>Task 3</td>
-                  </tr>
-                  <tr>
-                    <td>Task 2</td>
-                  </tr>
-                  <tr>
-                    <td>Task 1</td>
-                  </tr>
-                  <tr>
-                    <td>Task 1</td>
-                  </tr>
-                  <tr>
-                    <td>Task 1</td>
-                  </tr>
-                  <tr>
-                    <td>Task 1</td>
-                  </tr>
-                  <tr>
-                    <td>Task 1</td>
-                  </tr>
-                  <tr>
-                    <td>Task 1</td>
-                  </tr>
-                  <tr>
-                    <td>Task 1</td>
-                  </tr>
-                  <tr>
-                    <td>Task 1</td>
-                  </tr>
-                  <tr>
-                    <td>Task 1</td>
-                  </tr>
-                  <tr>
-                    <td>Task 1</td>
-                  </tr>
-                  <tr>
-                    <td>Task 1</td>
-                  </tr>
-                  <tr>
-                    <td>Task 1</td>
-                  </tr>
-                  <tr>
-                    <td>Task 1</td>
-                  </tr>
-                  <tr>
-                    <td>Task 1</td>
-                  </tr>
-                  <tr>
-                    <td>Task 1</td>
-                  </tr>
-                  <tr>
-                    <td>Task 1</td>
-                  </tr>
-                  <tr>
-                    <td>Task 1</td>
-                  </tr>
-                  <tr>
-                    <td>Task 1</td>
-                  </tr>
-                  <tr>
-                    <td>Task 1</td>
+                    <td>
+                      <div class="content">Designing church's flyer</div>
+                      <aside class="task-action-container">
+                        <button type="button" class="done-btn">
+                          <i class="far fa-square-check"></i>
+                        </button>
+                        <button type="button" class="edit-btn">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button type="button" class="delete-btn">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </aside>
+                    </td>
                   </tr>
                 </table>
               </div>
             </div>
           </article>
         </section>
+
         <!-- New Task Form Container-->
         <section class="task-form-container">
           <!-- New Task Form -->
@@ -181,7 +155,7 @@
               >
               <textarea
                 id="task-description"
-                rows="6"
+                rows="4"
                 placeholder="Enter task description here"></textarea>
             </div>
             <div class="input-field">
@@ -193,11 +167,41 @@
                 <option value="low">Low</option>
               </select>
             </div>
+            <div class="input-field">
+              <label for="deadline" class="input-label">Deadline</label>
+              <input type="date" id="deadline" required />
+            </div>
             <div class="submitBtn-container">
               <button type="submit" class="btn save-btn">Save Task</button>
               <button type="button" class="btn cancel-btn">Cancel</button>
             </div>
           </form>
+        </section>
+
+        <!-- Display Selected Item's Content -->
+        <section class="selectedItem-container">
+          <article id="selectedItem-body">
+            <h2>Selected Task Details</h2>
+            <div class="input-field">
+              <h4>Title</h4>
+              <p class="title"></p>
+            </div>
+            <div class="input-field">
+              <h4>Description</h4>
+              <p class="description"></p>
+            </div>
+            <div class="input-field">
+              <h4>Priority</h4>
+              <p class="priority"></p>
+            </div>
+            <div class="input-field">
+              <h4>Deadline</h4>
+              <p class="deadline"></p>
+            </div>
+            <div class="submitBtn-container">
+              <button type="button" class="btn close-btn">Close</button>
+            </div>
+          </article>
         </section>
       </main>
       <footer>
