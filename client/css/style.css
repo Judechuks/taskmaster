@@ -74,9 +74,7 @@ p {
   border-radius: 0.25rem;
   text-transform: capitalize;
   border: 2px solid;
-}
-.alert-container.alert-remove {
-  top: -50px;
+  transition: 0.6s;
 }
 .alert-danger {
   top: 80px;
