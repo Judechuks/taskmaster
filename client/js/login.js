@@ -44,20 +44,24 @@ document
     if (!password.trim()) {
       displayAlertMessage("password can not be empty spaces", "danger");
     } else {
-      const response = await fetch(`${apiUrl}/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      try {
+        const response = await fetch(`${apiUrl}/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
 
-      if (response.ok) {
-        const data = await response.json();
-        // localStorage.setItem("token", data.token); // Store token in local storage
-        displayAlertMessage("Login successful!", "success");
-        window.location = "/dashboard.html";
-        // loadTasks(); // Load tasks after successful login
-      } else {
-        displayAlertMessage(`Login failed! ${response.statusText}`, "danger");
+        if (response.ok) {
+          const data = await response.json();
+          // localStorage.setItem("token", data.token); // Store token in local storage
+          displayAlertMessage("Login successful!", "success");
+          window.location = "/dashboard.html";
+          // loadTasks(); // Load tasks after successful login
+        } else {
+          displayAlertMessage(`Login failed! ${response.statusText}`, "danger");
+        }
+      } catch (error) {
+        displayAlertMessage(`failed ${error}`, "danger");
       }
     }
   });

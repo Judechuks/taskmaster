@@ -50,25 +50,29 @@ document
     } else if (password !== confirmPassword) {
       displayAlertMessage("Both passwords do not match", "danger");
     } else {
-      const response = await fetch(`${apiUrl}/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          password,
-        }),
-      });
+      try {
+        const response = await fetch(`${apiUrl}/register`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            firstName,
+            lastName,
+            email,
+            password,
+          }),
+        });
 
-      if (response.ok) {
-        displayAlertMessage("Registration successful!", "success");
-        window.location = "/login.html";
-      } else {
-        displayAlertMessage(
-          `Registration failed! ${response.statusText}`,
-          "danger"
-        );
+        if (response.ok) {
+          displayAlertMessage("Registration successful!", "success");
+          window.location = "/login.html";
+        } else {
+          displayAlertMessage(
+            `Registration failed! ${response.statusText}`,
+            "danger"
+          );
+        }
+      } catch (error) {
+        displayAlertMessage(`failed ${error}`, "danger");
       }
     }
   });
