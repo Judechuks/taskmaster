@@ -1,3 +1,5 @@
+const apiUrl = "http://localhost:8080"; // Base URL of the API
+
 // Hamburger
 const hamburger = document.querySelector(".hamburger");
 const sidebar = document.querySelector(".sidebar");
@@ -38,6 +40,19 @@ const currentMonth = monthsOfTheYear[today.getMonth()].fullName;
 const currentDate = today.getDate();
 // const currentYear = today.getFullYear();
 tellDate.textContent = `${currentDay}, ${currentDate} ${currentMonth}`;
+
+// alert message
+const alertContainer = document.querySelector(".alert-container");
+const alertText = document.querySelector(".alert-container .text");
+function displayAlertMessage(msg, action) {
+  alertText.textContent = msg;
+  alertContainer.classList.add(`alert-${action}`);
+
+  // remove alert message
+  setTimeout(function () {
+    alertContainer.classList.remove(`alert-${action}`);
+  }, 2000);
+}
 
 const taskFormContainer = document.querySelector(".task-form-container");
 const taskForm = document.getElementById("task-form");
@@ -94,3 +109,46 @@ function getDetails(title, description, priority, deadline) {
     "#selectedItem-body .deadline"
   ).textContent = `${deadline}`;
 }
+
+// Handle add new task submission
+document
+  .getElementById("task-form")
+  .addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const taskTitle = document.getElementById("task-title").value;
+    const taskDescription = document.getElementById("task-description").value;
+    const taskPriority = document.getElementById("task-priority").value;
+    const taskDeadline = document.getElementById("deadline").value;
+
+    // check if fields are empty space
+    if (!taskTitle.trim()) {
+      displayAlertMessage("Title can't be empty", "danger");
+    } else if (!taskPriority.trim() || !taskDeadline.trim()) {
+      displayAlertMessage("Please choose task priority and deadline", "danger");
+    } else {
+      try {
+        const response = await fetch(`${apiUrl}/add_task`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            taskTitle,
+            taskDescription,
+            taskPriority,
+            taskDeadline,
+          }),
+        });
+
+        if (response.ok) {
+          displayAlertMessage("Task added successfully!", "success");
+        } else {
+          displayAlertMessage(
+            `failed to add task ${response.statusText}`,
+            "danger"
+          );
+        }
+      } catch (error) {
+        displayAlertMessage(`failed ${error}`, "danger");
+      }
+    }
+  });
