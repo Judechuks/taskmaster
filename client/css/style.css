@@ -75,6 +75,7 @@ p {
   text-transform: capitalize;
   border: 2px solid;
   transition: 0.6s;
+  z-index: 1000;
 }
 .alert-danger {
   top: 80px;
