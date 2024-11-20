@@ -7,13 +7,12 @@ The capstone project showcased here demonstrates my proficiency in various techn
 
 #### TABLE OF CONTENT
 
-- [CAPSTONE PROJECT: TASKMASTER](#capstone-project-taskmaster)
-      - [TABLE OF CONTENT](#table-of-content)
+- [CAPSTONE PROJECT: TASKMASTER](#capstone-project-taskmaster) - [TABLE OF CONTENT](#table-of-content)
   - [MOTIVATION](#motivation)
   - [LINK](#link)
   - [FEATURES](#features)
   - [DEPENDENCIES AND TECHNOLOGIES USED](#dependencies-and-technologies-used)
-      - [Installation:](#installation)
+    - [Installation:](#installation)
 
 ---
 
@@ -47,4 +46,76 @@ The capstone project showcased here demonstrates my proficiency in various techn
   #### Installation:
 
   `npm init -y`
+  <br />
+
+  - ### Express
+
+NodeJS' framework for building web application (server side).
+
+#### Installation:
+
+`npm install express`
+<br />
+
+- ### Mongoose
+
+  The ODM (Object Data Modeling) library for MongoDB. The NoSQL for the database.
+
+  #### Installation:
+
+  `npm install mongoose`
+  <br />
+
+- ### Bcrypt
+
+  Library for hashing passwords.
+
+  #### Installation:
+
+  `npm install bcrypt`
+  <br />
+
+- ### JsonWebToken (JWT)
+
+  The jsonwebtoken for handling JWT authentication.
+
+  #### Installation:
+
+  `npm install jsonwebtoken`
+  <br />
+
+- ### CORS
+
+  cors: The middleware for enabling CORS (Cross-Origin Resource Sharing).
+
+  #### Installation:
+
+  `npm install cors`
+  <br />
+
+- ### Body-Parser
+
+  body-parser: The middleware to parse incoming request bodies.
+
+  #### Installation:
+
+  `npm install body-parser`
+  <br />
+
+- ### Nodemon
+
+  Nodemon: To reload the server when changes are made to the server script.
+
+  #### Installation:
+
+  `npm install nodemon`
+  <br />
+
+- ### Dotenv
+
+  Dotenv: For environment variables. To conceal sensitive information.
+
+  #### Installation:
+
+  `npm install dotenv`
   <br />
