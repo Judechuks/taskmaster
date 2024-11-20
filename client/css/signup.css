@@ -90,10 +90,31 @@
 }
 
 /* New task form styles */
+.input-field:has(select) {
+  position: relative;
+}
 .input-field select {
   cursor: pointer;
   appearance: none; /* removes the default caret icon*/
-  /* To add personal dropdown icon */
+}
+/* To add personal dropdown icon */
+.input-field:has(select)::before,
+.input-field:has(select)::after {
+  --size: 0.33rem;
+  content: "";
+  position: absolute;
+  right: 1rem;
+  pointer-events: none; /* making it unclickable, instead the select is being clicked */
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+}
+.input-field:has(select)::before {
+  border-bottom: var(--size) solid black;
+  top: 63%;
+}
+.input-field:has(select)::after {
+  border-top: var(--size) solid black;
+  top: 73%;
 }
 .input-field textarea {
   resize: none;
