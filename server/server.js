@@ -1,0 +1,22 @@
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+require("./db"); // Import database connection
+
+const authRoutes = require("./auth"); // Import authentication routes
+const taskRoutes = require("./taskRoutes"); // Import task routes
+
+const app = express();
+app.use(cors()); // Enable CORS for all routes
+app.use(bodyParser.json()); // Parse JSON request bodies
+
+// Defines authentication routes for registration and login
+app.use("/api/auth", authRoutes);
+// Defines task routes for CRUD operations on tasks
+app.use("/api/tasks", taskRoutes);
+
+// Starting the server on specified port (default is 3000)
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`); // Log server start message
+});
