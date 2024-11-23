@@ -1,10 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-require("./db"); // Import database connection
+require("./config/db"); // Import database connection
 
-const authRoutes = require("./auth"); // Import authentication routes
-const taskRoutes = require("./taskRoutes"); // Import task routes
+const authRoutes = require("./routes/auth"); // Import authentication routes
+const taskRoutes = require("./routes/taskRoutes"); // Import task routes
 
 const app = express();
 app.use(cors()); // Enable CORS for all routes
