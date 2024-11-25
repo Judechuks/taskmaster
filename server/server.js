@@ -10,6 +10,10 @@ const app = express();
 app.use(cors()); // Enable CORS for all routes
 app.use(bodyParser.json()); // Parse JSON request bodies
 
+// Defines info for the root
+app.get("/", (req, res) => {
+  res.json({ info: "TaskMaster API" });
+});
 // Defines authentication routes for registration and login
 app.use("/api/auth", authRoutes);
 // Defines task routes for CRUD operations on tasks
