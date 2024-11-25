@@ -5,6 +5,8 @@
   --light-blue-clr: hsl(244, 71%, 55%);
   --dark-green-clr: hsl(125, 67%, 44%);
   --light-green-clr: hsl(125, 71%, 55%);
+  --dark-orange-clr: hsl(20, 100%, 50%);
+  --light-orange-clr: hsl(20, 100%, 60%);
 }
 /* Main Container */
 .main-container {
@@ -74,6 +76,10 @@
   color: #721c24;
   background: #f8c9cd;
   transition: 0.4s;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
 }
 .logout-btn:hover {
   background: #fcc3c8;
@@ -119,6 +125,11 @@
 .col-2 .body {
   margin-top: 20px;
 }
+.col-2 .body .no-content {
+  font-size: 2rem;
+  text-align: center;
+  margin-block: 50px;
+}
 .col-2 .body button {
   cursor: pointer;
   background-color: transparent;
@@ -137,20 +148,27 @@
   margin-top: 15px;
   width: 100%;
 }
+#taskTable tr {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  margin-bottom: 2px;
+}
+#taskTable td:first-child {
+  border-radius: 4px 0 0 4px;
+}
+#taskTable td:last-child {
+  border-radius: 0 4px 4px 0;
+}
 #taskTable td {
-  display: flex;
-  gap: 0px 10px;
-  align-items: center;
-  flex-wrap: wrap;
-  border-radius: 4px;
   background-color: gray;
+  vertical-align: middle;
   padding: 4px 8px;
 }
 #taskTable .content {
-  flex: 1;
-  border-radius: 3px;
   cursor: pointer;
-  line-height: 1.2;
+  overflow: hidden;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
 }
 #taskTable .content:hover {
   text-decoration: underline;
@@ -162,6 +180,7 @@
   gap: 5px;
 }
 .task-action-container .done-btn,
+.task-action-container .pending-btn,
 .task-action-container .edit-btn,
 .task-action-container .delete-btn {
   background: transparent;
@@ -169,26 +188,39 @@
   font-size: 1rem;
   margin: 0 0.15rem;
 }
-.done-btn {
+.task-action-container .done-btn:hover,
+.task-action-container .pending-btn:hover,
+.task-action-container .edit-btn:hover,
+.task-action-container .delete-btn:hover {
+  transform: scale(1.2);
+}
+.task-action-container .done-btn {
   color: var(--dark-green-clr);
+  font-size: 1.1rem;
 }
 .done-btn:hover {
   color: var(--light-green-clr);
-  transform: scale(1.2);
+}
+.pending-btn {
+  color: var(--light-orange-clr);
+}
+.pending-btn:hover {
+  color: var(--dark-orange-clr);
 }
 .edit-btn {
   color: var(--dark-blue-clr);
 }
 .edit-btn:hover {
   color: var(--light-blue-clr);
-  transform: scale(1.2);
 }
 .delete-btn {
   color: var(--dark-red-clr);
 }
 .delete-btn:hover {
   color: var(--light-red-clr);
-  transform: scale(1.2);
+}
+.hide {
+  display: none;
 }
 
 /* Add Task Form Styles */
@@ -217,6 +249,12 @@
   width: clamp(200px, 100%, 650px);
   margin: auto;
 }
+#task-form {
+  padding-block: 20px;
+}
+#task-form h2 {
+  margin-top: 50px;
+}
 .selectedItem-container article {
   border-radius: 10px;
   padding: 30px;
@@ -231,6 +269,28 @@
 }
 .selectedItem-container .close-btn:hover {
   background: lightgrey;
+}
+
+/* pagination */
+#paginationControls {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#prevPageBtn,
+#nextPageBtn {
+  border: none;
+  padding: 3px 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: var(--light-green-clr);
+}
+#prevPageBtn {
+  border-radius: 5px 0 0 5px;
+}
+#nextPageBtn {
+  border-radius: 0 5px 5px 0;
 }
 
 /* Hamburger */
@@ -311,6 +371,17 @@ nav .hamburger.active .bar::after {
   .sidebar.active {
     top: 54px;
     height: 100vh;
+  }
+}
+@media (max-width: 470px) {
+  #taskTable tr {
+    grid-template-columns: 1fr;
+  }
+  #taskTable td:first-child {
+    border-radius: 4px 4px 0 0;
+  }
+  #taskTable td:last-child {
+    border-radius: 0 0 4px 4px;
   }
 }
 @media (max-width: 450px) {
