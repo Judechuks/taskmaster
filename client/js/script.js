@@ -8,6 +8,8 @@ function displayAlertMessage(msg, action) {
   // remove alert message
   setTimeout(function () {
     alertContainer.classList.remove(`alert-${action}`);
-    alertText.textContent = "";
   }, 2000);
+  setTimeout(function () {
+    alertText.textContent = ""; // remove the content afterwards
+  }, 3000);
 }
