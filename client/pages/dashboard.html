@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../css/signup.css" />
     <link rel="stylesheet" href="../css/dashboard.css" />
     <script defer src="../js/script.js"></script>
+    <script defer src="../js/dashboard.js"></script>
   </head>
   <body onload="loadUserData()">
     <div class="wrapper">
@@ -86,7 +87,7 @@
                 </p>
               </div>
               <aside>
-                <p>All Tasks</p>
+                <p class="content-showing">All Tasks</p>
               </aside>
             </div>
 
@@ -108,7 +109,7 @@
                   <!-- Dropdown to filter tasks by priority -->
                   <select id="filterPriority" onchange="filterTasks()">
                     <!-- Options for filtering tasks by priority -->
-                    <option value="">All</option>
+                    <option value="" selected>All</option>
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
                     <option value="high">High</option>
@@ -135,60 +136,28 @@
                         type="radio"
                         name="status"
                         value=""
+                        checked
+                        id="all"
                         onchange="filterTasks()" />
                       All Tasks
                     </label>
                   </div>
                 </div>
-                <table id="taskTable">
-                  <tr>
-                    <td>
-                      <div class="content">
-                        Creating a fullstack task management app with HTML, CSS,
-                        JavaScript, NodeJS, ExpressJS and MongoDB
-                      </div>
-                      <aside class="task-action-container">
-                        <button type="button" class="done-btn">
-                          <i class="far fa-square-check"></i>
-                        </button>
-                        <button type="button" class="edit-btn">
-                          <i class="fas fa-edit"></i>
-                        </button>
-                        <button type="button" class="delete-btn">
-                          <i class="fas fa-trash"></i>
-                        </button>
-                      </aside>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="content">Designing church's flyer</div>
-                      <aside class="task-action-container">
-                        <button type="button" class="done-btn">
-                          <i class="far fa-square-check"></i>
-                        </button>
-                        <button type="button" class="edit-btn">
-                          <i class="fas fa-edit"></i>
-                        </button>
-                        <button type="button" class="delete-btn">
-                          <i class="fas fa-trash"></i>
-                        </button>
-                      </aside>
-                    </td>
-                  </tr>
-                </table>
+                <table id="taskTable"></table>
               </div>
               <!-- Pagination Controls -->
               <div id="paginationControls">
                 <!-- Previous Page Button -->
                 <button onclick="previousPage()" id="prevPageBtn">
-                  Previous
+                  &lt; Prev
                 </button>
-                Page:
-                <!-- Current page number display -->
-                <span id="currentPage">1</span> of <span id="totalPage">1</span>
+                <div>
+                  Page:
+                  <span id="currentPage">1</span> of
+                  <span id="totalPage">1</span>
+                </div>
                 <!-- Next Page Button -->
-                <button onclick="nextPage()" id="nextPageBtn">Next></button>
+                <button onclick="nextPage()" id="nextPageBtn">Next &gt;</button>
               </div>
             </div>
           </article>
