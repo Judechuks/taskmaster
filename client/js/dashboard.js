@@ -52,7 +52,7 @@ async function loadTasks() {
 
     displayTasks(tasks);
     updateTaskStats(totalUncompleted, totalCompleted);
-    resetFilters();
+    // resetFilters();
 
     // Update pagination controls
     updatePaginationControls(totalTasks);
@@ -75,7 +75,7 @@ function displayTasks(tasks) {
   taskList.innerHTML = ""; // Clear existing tasks
 
   if (!tasks.length) {
-    taskList.innerHTML = `<div class="no-content">No task for this current Page</div>`;
+    taskList.innerHTML = `<div class="no-content">No task for this Page</div>`;
     return;
   }
 
@@ -93,7 +93,7 @@ function displayTasks(tasks) {
     const editButton = document.createElement("button");
     editButton.classList.add("edit-btn");
     editButton.innerHTML = `<i class="fas fa-edit"></i>`;
-    editButton.onclick = () => editTask(task._id); // Call editTask function with task ID
+    editButton.onclick = () => editTask(task);
 
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("delete-btn");
@@ -245,7 +245,14 @@ async function searchTasks() {
   const token = localStorage.getItem("taskmasterToken");
 
   try {
-    const response = await fetch(`${apiUrl}/api/tasks/search?query=${query}`, {
+    let url;
+    if (query) {
+      url = `${apiUrl}/api/tasks/search?query=${query}&page=${currentPage}&limit=${tasksPerPage}`;
+    } else {
+      url = `${apiUrl}/api/tasks?page=${currentPage}&limit=${tasksPerPage}`;
+    }
+
+    const response = await fetch(url, {
       headers: {
         Authorization: token,
         "Content-Type": "application/json",
@@ -397,45 +404,71 @@ async function deleteTask(taskId) {
 }
 
 // Edit a task by ID
-async function editTask(taskId) {
-  const newTitle = prompt("Enter new title:");
-  const newDescription = prompt("Enter new description:");
-  const newDeadline = prompt("Enter new deadline (YYYY-MM-DD):");
-  const newPriority = prompt("Enter new priority (low, medium, high):");
+async function editTask(task) {
+  document.getElementById("edit-task-title").value = task.title;
+  document.getElementById("edit-task-description").value = task.description;
+  document.getElementById("edit-task-priority").value = task.priority;
+  document.getElementById("edit-task-deadline").value =
+    task.deadline.split("T")[0];
 
-  if (!newTitle || !newDescription || !newDeadline || !newPriority) {
-    displayAlertMessage("All fields are required!", "danger");
-    return;
-  }
+  editTaskContainer.classList.add("active");
 
-  const token = localStorage.getItem("taskmasterToken");
+  editTaskForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const newTitle = document.getElementById("edit-task-title").value;
+    const newDescription = document.getElementById(
+      "edit-task-description"
+    ).value;
+    const newDeadline = document.getElementById("edit-task-deadline").value;
+    const newPriority = document.getElementById("edit-task-priority").value;
 
-  try {
-    const response = await fetch(`${apiUrl}/api/tasks/${taskId}`, {
-      method: "PUT",
-      headers: {
-        Authorization: token,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: newTitle,
-        description: newDescription,
-        deadline: newDeadline,
-        priority: newPriority,
-      }),
-    });
-
-    if (response.ok) {
-      await loadTasks(); // Reload tasks after editing one
-      displayAlertMessage("Task updated successfully!", "success");
-    } else {
-      const data = await response.json();
-      displayAlertMessage(`${data.error}`, "danger");
+    if (!newTitle.trim()) {
+      displayAlertMessage("Please fill the title field.", "danger");
+      return;
+    } else if (!newDeadline || !newPriority) {
+      displayAlertMessage(
+        "Please fill the deadline and priority fields.",
+        "danger"
+      );
+      return;
     }
-  } catch (error) {
-    console.error("Error updating task:", error);
-    displayAlertMessage("An error occurred while updating the task.", "danger");
-  }
+
+    const token = localStorage.getItem("taskmasterToken");
+
+    try {
+      const response = await fetch(`${apiUrl}/api/tasks/${task._id}`, {
+        method: "PUT",
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: newTitle,
+          description: newDescription,
+          deadline: newDeadline,
+          priority: newPriority,
+        }),
+      });
+
+      if (response.ok) {
+        await loadTasks(); // Reload tasks after editing one
+        displayAlertMessage("Task updated successfully!", "success");
+
+        setTimeout(() => {
+          editTaskContainer.classList.remove("active");
+        }, 3000);
+      } else {
+        const data = await response.json();
+        displayAlertMessage(`${data.error}`, "danger");
+      }
+    } catch (error) {
+      console.error("Error updating task:", error);
+      displayAlertMessage(
+        "An error occurred while updating the task.",
+        "danger"
+      );
+    }
+  });
 }
 
 // Hamburger
@@ -480,9 +513,12 @@ const currentDate = today.getDate();
 tellDate.textContent = `${currentDay}, ${currentDate} ${currentMonth}`;
 
 const taskFormContainer = document.querySelector(".task-form-container");
+const editTaskContainer = document.querySelector(".edit-task-container");
 const taskForm = document.getElementById("task-form");
+const editTaskForm = document.getElementById("edit-task-form");
 const addTaskBtn = document.querySelector(".add-task-btn");
 const cancelBtn = document.querySelector(".cancel-btn");
+const cancelEditBtn = document.querySelector(".cancel-edit-btn");
 const selectedItemContainer = document.querySelector(".selectedItem-container");
 const selectedItemCloseBtn = document.querySelector(".close-btn");
 
@@ -494,6 +530,11 @@ addTaskBtn.addEventListener("click", () => {
 // close task form
 cancelBtn.addEventListener("click", () => {
   taskFormContainer.classList.remove("active");
+});
+
+// close edit task form
+cancelEditBtn.addEventListener("click", () => {
+  editTaskContainer.classList.remove("active");
 });
 
 // close selected Item Container Modal
