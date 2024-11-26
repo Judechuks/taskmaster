@@ -22,15 +22,17 @@
   <body onload="loadUserData()">
     <div class="wrapper">
       <header>
-        <a href="../index.html" class="logo">
-          Task<span class="brand-span">Master</span>
-        </a>
-        <nav>
-          <button class="btn logout-btn" onclick="logout()">logout</button>
-          <div class="hamburger">
-            <div class="bar"></div>
-          </div>
-        </nav>
+        <div class="container-flex pad-x">
+          <a href="../index.html" class="logo">
+            Task<span class="brand-span">Master</span>
+          </a>
+          <nav>
+            <button class="btn logout-btn" onclick="logout()">logout</button>
+            <div class="hamburger">
+              <div class="bar"></div>
+            </div>
+          </nav>
+        </div>
       </header>
       <!-- Alert - for alert message -->
       <article class="alert-container">
@@ -38,7 +40,7 @@
         <div class="progress"></div>
       </article>
       <!-- Main Container -->
-      <main class="main-container">
+      <main class="main-container pad-x">
         <!-- Col-1's Content -->
         <section class="col-1">
           <nav class="sidebar">
@@ -94,53 +96,62 @@
             <!-- Col-2's Body -->
             <div class="body">
               <div>
-                <div class="task-controls">
-                  <button class="add-task-btn">
-                    <i class="fa fa-plus"></i> add a new task
-                  </button>
-                  <!-- Search input field -->
-                  <input
-                    type="text"
-                    id="searchBar"
-                    placeholder="Search tasks..."
-                    onkeyup="searchTasks()" />
-
-                  <label for="filterPriority">Filter by: Priority:</label>
-                  <!-- Dropdown to filter tasks by priority -->
-                  <select id="filterPriority" onchange="filterTasks()">
-                    <!-- Options for filtering tasks by priority -->
-                    <option value="" selected>All</option>
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                  </select>
-                  <div>
-                    <label>
+                <div class="task-control-container">
+                  <div class="task-controls">
+                    <div class="task-status">
+                      <label>
+                        <input
+                          type="radio"
+                          name="status"
+                          value=""
+                          checked
+                          id="all"
+                          onchange="filterTasks()" />
+                        All Tasks
+                      </label>
+                      <label>
+                        <input
+                          type="radio"
+                          name="status"
+                          value="pending"
+                          onchange="filterTasks()" />
+                        Uncompleted Tasks
+                      </label>
+                      <label>
+                        <input
+                          type="radio"
+                          name="status"
+                          value="done"
+                          onchange="filterTasks()" />
+                        Completed Tasks
+                      </label>
+                    </div>
+                    <div class="priority-filter">
+                      <label for="filterPriority">Filter by Priority:</label>
+                      <!-- Dropdown to filter tasks by priority -->
+                      <select id="filterPriority" onchange="filterTasks()">
+                        <!-- Options for filtering tasks by priority -->
+                        <option value="" selected>All</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="second-task-controls">
+                    <div class="addTask-container">
+                      <button class="add-task-btn">
+                        <i class="fa fa-plus"></i> add a new task
+                      </button>
+                    </div>
+                    <!-- Search input field -->
+                    <div class="searchBar-container">
                       <input
-                        type="radio"
-                        name="status"
-                        value="pending"
-                        onchange="filterTasks()" />
-                      Uncompleted Tasks
-                    </label>
-                    <label>
-                      <input
-                        type="radio"
-                        name="status"
-                        value="done"
-                        onchange="filterTasks()" />
-                      Completed Tasks
-                    </label>
-                    <label>
-                      <input
-                        type="radio"
-                        name="status"
-                        value=""
-                        checked
-                        id="all"
-                        onchange="filterTasks()" />
-                      All Tasks
-                    </label>
+                        type="text"
+                        id="searchBar"
+                        placeholder="Search tasks..."
+                        onkeyup="searchTasks()" />
+                    </div>
                   </div>
                 </div>
                 <table id="taskTable"></table>
@@ -205,6 +216,52 @@
           </form>
         </section>
 
+        <!-- Edit Task Form Container-->
+        <section class="edit-task-container">
+          <!-- Edit Task Form -->
+          <form id="edit-task-form">
+            <h2>Edit Task</h2>
+            <div class="input-field">
+              <label for="edit-task-title" class="input-label">Title</label>
+              <input
+                type="text"
+                id="edit-task-title"
+                placeholder="Enter task title"
+                required />
+            </div>
+            <div class="input-field">
+              <label for="edit-task-description" class="input-label"
+                >Description</label
+              >
+              <textarea
+                id="edit-task-description"
+                rows="4"
+                placeholder="Enter task description here"></textarea>
+            </div>
+            <div class="input-field">
+              <label for="edit-task-priority" class="input-label"
+                >Priority</label
+              >
+              <select id="edit-task-priority" required>
+                <option value selected disabled>Choose priority</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+            <div class="input-field">
+              <label for="edit-task-deadline" class="input-label"
+                >Deadline</label
+              >
+              <input type="date" id="edit-task-deadline" required />
+            </div>
+            <div class="submitBtn-container">
+              <button type="submit" class="btn save-edit-btn">Save Task</button>
+              <button type="button" class="btn cancel-edit-btn">Cancel</button>
+            </div>
+          </form>
+        </section>
+
         <!-- Display Selected Item's Content -->
         <section class="selectedItem-container">
           <article id="selectedItem-body">
@@ -232,7 +289,9 @@
         </section>
       </main>
       <footer>
-        <p>Made by Judechuks</p>
+        <div class="pad-x">
+          <p>Made by Judechuks</p>
+        </div>
       </footer>
     </div>
   </body>
