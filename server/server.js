@@ -19,8 +19,11 @@ app.use("/api/auth", authRoutes);
 // Defines task routes for CRUD operations on tasks
 app.use("/api/tasks", taskRoutes);
 
+// Export the app for Vercel to use
+module.exports = app;
+
 // Starting the server on specified port (default is 3000)
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`); // Log server start message
-});
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`); // Log server start message
+// });
