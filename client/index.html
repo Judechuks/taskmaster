@@ -13,13 +13,15 @@
   <body>
     <div class="wrapper">
       <header>
-        <a href="index.html" class="logo">
-          Task<span class="brand-span">Master</span>
-        </a>
-        <a href="pages/login.html" class="btn btn-primary">login</a>
+        <div class="container container-flex">
+          <a href="index.html" class="logo">
+            Task<span class="brand-span">Master</span>
+          </a>
+          <a href="pages/login.html" class="btn btn-primary">login</a>
+        </div>
       </header>
       <main class="main-container">
-        <section class="hero">
+        <section class="hero container">
           <article class="col-1">
             <div class="intro">
               <h1>Welcome To Task<span class="brand-span">Master</span></h1>
@@ -38,14 +40,100 @@
             </div>
           </article>
           <article class="col-2">
-            <img src="assets/time.jpg" alt="hero image" />
+            <img src="assets/to_do_list.svg" alt="hero image" />
           </article>
         </section>
         <!-- Features -->
-        <!-- <section></section> -->
+        <section id="features" class="container">
+          <h2 class="section-title">Key Features</h2>
+          <article class="card-collection">
+            <div class="card">
+              <div class="card-img-container">
+                <img src="./assets/add_document.svg" alt="task creation" />
+              </div>
+              <h4>Task Creation</h4>
+              <p>
+                Easily create tasks with titles, descriptions, deadlines, and
+                priorities.
+              </p>
+            </div>
+            <div class="card">
+              <div class="card-img-container">
+                <img src="./assets/checklist.svg" alt="checklist" />
+              </div>
+              <h4>Mark Tasks as Completed</h4>
+              <p>
+                Keep track of your progress by marking tasks as done or pending.
+              </p>
+            </div>
+            <div class="card">
+              <div class="card-img-container">
+                <img
+                  src="./assets/file_searching.svg"
+                  alt="search and filter" />
+              </div>
+              <h4>Search and Filter</h4>
+              <p>
+                Quickly find tasks by title or filter by priority and completion
+                status.
+              </p>
+            </div>
+            <div class="card">
+              <div class="card-img-container">
+                <img src="./assets/notebook_ask.svg" alt="edit task" />
+              </div>
+              <h4>Edit Tasks</h4>
+              <p>
+                Modify tasks as your project evolves. Making changes to task
+                when necessary.
+              </p>
+            </div>
+            <div class="card">
+              <div class="card-img-container">
+                <img src="./assets/throw_away.svg" alt="delete task" />
+              </div>
+              <h4>Delete Tasks</h4>
+              <p>
+                Delete or remove task from list for proper task management and
+                focus.
+              </p>
+            </div>
+            <div class="card">
+              <div class="card-img-container">
+                <img src="./assets/prioritise.svg" alt="pagination" />
+              </div>
+              <h4>Pagination</h4>
+              <p>
+                Navigate through your tasks seamlessly with pagination controls.
+              </p>
+            </div>
+          </article>
+        </section>
+
+        <section id="why-use" class="container">
+          <h2 class="section-title">
+            Why Use Task<span class="brand-span">Master?</span>
+          </h2>
+          <p>
+            TaskMaster simplifies your workflow, allowing you to focus on what
+            matters most. Whether you're managing personal projects or
+            collaborating with a team, our intuitive interface makes task
+            management easy and effective.
+          </p>
+          <p>
+            Join countless users who have enhanced their productivity and
+            organization with TaskMaster! Sign up now to experience the power of
+            efficient task management!
+          </p>
+          <a class="btn btn-primary" href="pages/signup.html">
+            Start Your Free Trial
+          </a>
+        </section>
       </main>
       <footer>
-        <p>Made by Judechuks</p>
+        <div class="container">
+          <p>Made by Judechuks</p>
+        </div>
       </footer>
     </div>
   </body>
