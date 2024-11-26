@@ -11,5 +11,5 @@ function displayAlertMessage(msg, action) {
   }, 2000);
   setTimeout(function () {
     alertText.textContent = ""; // remove the content afterwards
-  }, 3000);
+  }, 2500);
 }
