@@ -2,12 +2,22 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 require("./config/db"); // Import database connection
+const apiUrl = "https://pro-taskmaster.vercel.app";
 
 const authRoutes = require("./routes/auth"); // Import authentication routes
 const taskRoutes = require("./routes/taskRoutes"); // Import task routes
 
 const app = express();
-app.use(cors()); // Enable CORS for all routes
+
+// CORS configuration
+const corsOptions = {
+  origin: apiUrl, // Allow requests from this origin
+  methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
+  allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
+  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+};
+
+app.use(cors(corsOptions)); // Enable CORS with specified options
 app.use(bodyParser.json()); // Parse JSON request bodies
 
 // Defines info for the root
@@ -23,7 +33,7 @@ app.use("/api/tasks", taskRoutes);
 module.exports = app;
 
 // Starting the server on specified port (default is 3000)
-// const PORT = process.env.PORT || 3000;
-// app.listen(PORT, () => {
-//   console.log(`Server running on port ${PORT}`); // Log server start message
-// });
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`); // Log server start message
+});
