@@ -1,18 +1,5 @@
 const apiUrl = "http://localhost:8080"; // Base URL of the API
 
-// alert message
-const alertContainer = document.querySelector(".alert-container");
-const alertText = document.querySelector(".alert-container .text");
-function displayAlertMessage(msg, action) {
-  alertText.textContent = msg;
-  alertContainer.classList.add(`alert-${action}`);
-
-  // remove alert message
-  setTimeout(function () {
-    alertContainer.classList.remove(`alert-${action}`);
-  }, 2000);
-}
-
 // Toggle hide and show password
 const showPassword = document.querySelectorAll(".show-password");
 showPassword.forEach((item) => {
@@ -45,23 +32,24 @@ document
       displayAlertMessage("password can not be empty spaces", "danger");
     } else {
       try {
-        const response = await fetch(`${apiUrl}/login`, {
+        const response = await fetch(`${apiUrl}/api/auth/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password }),
         });
 
+        const data = await response.json();
+
         if (response.ok) {
-          const data = await response.json();
-          // localStorage.setItem("token", data.token); // Store token in local storage
+          localStorage.setItem("taskmasterToken", data.token); // Store token in local storage
           displayAlertMessage("Login successful!", "success");
-          window.location = "/dashboard.html";
-          // loadTasks(); // Load tasks after successful login
+          window.location.href = "dashboard.html";
         } else {
-          displayAlertMessage(`Login failed! ${response.statusText}`, "danger");
+          // displayAlertMessage(`Login failed! ${response.statusText}`, "danger");
+          displayAlertMessage(`Login failed! ${data.error}`, "danger");
         }
       } catch (error) {
-        displayAlertMessage(`failed ${error}`, "danger");
+        displayAlertMessage(`Login failed! ${error}`, "danger");
       }
     }
   });

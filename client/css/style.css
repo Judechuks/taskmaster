@@ -60,6 +60,15 @@ p {
 .btn-primary:hover {
   background-color: var(--primary-dark-clr);
 }
+.container {
+  max-width: 1100px;
+  margin-inline: auto;
+}
+.container-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 /* alert Message */
 .alert-container {
@@ -118,9 +127,6 @@ header {
   top: 0;
   z-index: 50;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   background-color: var(--white-clr);
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.384);
 }
@@ -141,13 +147,28 @@ header .btn {
   grid-row: 2/3;
 }
 .hero {
+  min-height: 90vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: 30px;
 }
+.section-title {
+  text-align: center;
+}
+.section-title::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 2px;
+  margin: 5px auto;
+  background-color: var(--primary-clr);
+}
 .hero h1 {
   margin-bottom: 20px;
+}
+.hero p {
+  text-align: justify;
 }
 .hero .btn {
   margin-top: 20px;
@@ -156,6 +177,62 @@ header .btn {
 .hero img {
   width: 100%;
   border-radius: 5px;
+}
+
+/* Section */
+#features,
+#why-use {
+  padding-block: 50px;
+}
+.section-title {
+  margin-bottom: 20px;
+}
+
+/* card collection */
+.card-collection {
+  display: grid;
+  gap: 20px;
+  padding-block: 20px;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+@media (max-width: 300px) {
+  .card-collection {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+.card {
+  border-radius: 5px;
+  padding: 20px 10px;
+  background-color: #fff;
+}
+.card-img-container {
+  width: 80px;
+  margin: auto;
+  border: 2px solid var(--primary-clr);
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
+.card img {
+  width: 100%;
+  display: block;
+}
+.card h4 {
+  text-align: center;
+  color: var(--black-clr);
+  margin-block: 10px;
+}
+.card p {
+  text-align: center;
+}
+
+/* why use */
+#why-use {
+  text-align: justify;
+}
+#why-use .btn {
+  display: block;
+  margin: 15px auto;
 }
 
 /* Footer */

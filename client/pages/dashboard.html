@@ -17,19 +17,22 @@
     <link rel="stylesheet" href="../css/signup.css" />
     <link rel="stylesheet" href="../css/dashboard.css" />
     <script defer src="../js/script.js"></script>
+    <script defer src="../js/dashboard.js"></script>
   </head>
-  <body>
+  <body onload="loadUserData()">
     <div class="wrapper">
       <header>
-        <a href="../index.html" class="logo">
-          Task<span class="brand-span">Master</span>
-        </a>
-        <nav>
-          <a href="/logout" class="btn logout-btn">logout</a>
-          <div class="hamburger">
-            <div class="bar"></div>
-          </div>
-        </nav>
+        <div class="container-flex pad-x">
+          <a href="../index.html" class="logo">
+            Task<span class="brand-span">Master</span>
+          </a>
+          <nav>
+            <button class="btn logout-btn" onclick="logout()">logout</button>
+            <div class="hamburger">
+              <div class="bar"></div>
+            </div>
+          </nav>
+        </div>
       </header>
       <!-- Alert - for alert message -->
       <article class="alert-container">
@@ -37,7 +40,7 @@
         <div class="progress"></div>
       </article>
       <!-- Main Container -->
-      <main class="main-container">
+      <main class="main-container pad-x">
         <!-- Col-1's Content -->
         <section class="col-1">
           <nav class="sidebar">
@@ -54,19 +57,21 @@
               <div class="categories">
                 <div class="flex-between">
                   <span class="category-text">All Tasks</span>
-                  <span class="quantity">25</span>
+                  <span id="totalTask"></span>
                 </div>
                 <div class="flex-between">
                   <span class="category-text">Uncompleted Tasks</span>
-                  <span class="quantity">10</span>
+                  <span id="uncompletedCount"></span>
                 </div>
                 <div class="flex-between">
                   <span class="category-text">Completed Tasks</span>
-                  <span class="quantity">15</span>
+                  <span id="completedCount"></span>
                 </div>
               </div>
               <div class="">
-                <a href="/logout" class="btn logout-btn">logout</a>
+                <button class="btn logout-btn" onclick="logout()">
+                  logout
+                </button>
               </div>
             </div>
           </nav>
@@ -77,60 +82,93 @@
           <article>
             <div class="header">
               <div>
-                <h2>Welcome, User</h2>
+                <h2>Welcome, <span id="user_firstname">User</span></h2>
                 <p>
                   <i class="fa fa-calendar-days"></i>
                   <span id="tellDate">Monday, 18 November</span>
                 </p>
               </div>
               <aside>
-                <p>All Tasks</p>
+                <p class="content-showing">All Tasks</p>
               </aside>
             </div>
 
             <!-- Col-2's Body -->
             <div class="body">
               <div>
-                <button class="add-task-btn">
-                  <i class="fa fa-plus"></i> add a new task
+                <div class="task-control-container">
+                  <div class="task-controls">
+                    <div class="task-status">
+                      <label>
+                        <input
+                          type="radio"
+                          name="status"
+                          value=""
+                          checked
+                          id="all"
+                          onchange="filterTasks()" />
+                        All Tasks
+                      </label>
+                      <label>
+                        <input
+                          type="radio"
+                          name="status"
+                          value="pending"
+                          onchange="filterTasks()" />
+                        Uncompleted Tasks
+                      </label>
+                      <label>
+                        <input
+                          type="radio"
+                          name="status"
+                          value="done"
+                          onchange="filterTasks()" />
+                        Completed Tasks
+                      </label>
+                    </div>
+                    <div class="priority-filter">
+                      <label for="filterPriority">Filter by Priority:</label>
+                      <!-- Dropdown to filter tasks by priority -->
+                      <select id="filterPriority" onchange="filterTasks()">
+                        <!-- Options for filtering tasks by priority -->
+                        <option value="" selected>All</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="second-task-controls">
+                    <div class="addTask-container">
+                      <button class="add-task-btn">
+                        <i class="fa fa-plus"></i> add a new task
+                      </button>
+                    </div>
+                    <!-- Search input field -->
+                    <div class="searchBar-container">
+                      <input
+                        type="text"
+                        id="searchBar"
+                        placeholder="Search tasks..."
+                        onkeyup="searchTasks()" />
+                    </div>
+                  </div>
+                </div>
+                <table id="taskTable"></table>
+              </div>
+              <!-- Pagination Controls -->
+              <div id="paginationControls">
+                <!-- Previous Page Button -->
+                <button onclick="previousPage()" id="prevPageBtn">
+                  &lt; Prev
                 </button>
-                <table id="taskTable">
-                  <tr>
-                    <td>
-                      <div class="content">
-                        Creating a fullstack task management app with HTML, CSS,
-                        JavaScript, NodeJS, ExpressJS and MongoDB
-                      </div>
-                      <aside class="task-action-container">
-                        <button type="button" class="done-btn">
-                          <i class="far fa-square-check"></i>
-                        </button>
-                        <button type="button" class="edit-btn">
-                          <i class="fas fa-edit"></i>
-                        </button>
-                        <button type="button" class="delete-btn">
-                          <i class="fas fa-trash"></i>
-                        </button>
-                      </aside>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="content">Designing church's flyer</div>
-                      <aside class="task-action-container">
-                        <button type="button" class="done-btn">
-                          <i class="far fa-square-check"></i>
-                        </button>
-                        <button type="button" class="edit-btn">
-                          <i class="fas fa-edit"></i>
-                        </button>
-                        <button type="button" class="delete-btn">
-                          <i class="fas fa-trash"></i>
-                        </button>
-                      </aside>
-                    </td>
-                  </tr>
-                </table>
+                <div>
+                  Page:
+                  <span id="currentPage">1</span> of
+                  <span id="totalPage">1</span>
+                </div>
+                <!-- Next Page Button -->
+                <button onclick="nextPage()" id="nextPageBtn">Next &gt;</button>
               </div>
             </div>
           </article>
@@ -168,12 +206,58 @@
               </select>
             </div>
             <div class="input-field">
-              <label for="deadline" class="input-label">Deadline</label>
-              <input type="date" id="deadline" required />
+              <label for="task-deadline" class="input-label">Deadline</label>
+              <input type="date" id="task-deadline" required />
             </div>
             <div class="submitBtn-container">
               <button type="submit" class="btn save-btn">Save Task</button>
               <button type="button" class="btn cancel-btn">Cancel</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Edit Task Form Container-->
+        <section class="edit-task-container">
+          <!-- Edit Task Form -->
+          <form id="edit-task-form">
+            <h2>Edit Task</h2>
+            <div class="input-field">
+              <label for="edit-task-title" class="input-label">Title</label>
+              <input
+                type="text"
+                id="edit-task-title"
+                placeholder="Enter task title"
+                required />
+            </div>
+            <div class="input-field">
+              <label for="edit-task-description" class="input-label"
+                >Description</label
+              >
+              <textarea
+                id="edit-task-description"
+                rows="4"
+                placeholder="Enter task description here"></textarea>
+            </div>
+            <div class="input-field">
+              <label for="edit-task-priority" class="input-label"
+                >Priority</label
+              >
+              <select id="edit-task-priority" required>
+                <option value selected disabled>Choose priority</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+            <div class="input-field">
+              <label for="edit-task-deadline" class="input-label"
+                >Deadline</label
+              >
+              <input type="date" id="edit-task-deadline" required />
+            </div>
+            <div class="submitBtn-container">
+              <button type="submit" class="btn save-edit-btn">Save Task</button>
+              <button type="button" class="btn cancel-edit-btn">Cancel</button>
             </div>
           </form>
         </section>
@@ -205,7 +289,9 @@
         </section>
       </main>
       <footer>
-        <p>Made by Judechuks</p>
+        <div class="pad-x">
+          <p>Made by Judechuks</p>
+        </div>
       </footer>
     </div>
   </body>

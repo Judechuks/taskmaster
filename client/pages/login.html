@@ -15,15 +15,18 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/signup.css" />
+    <script defer src="../js/script.js"></script>
     <script defer src="../js/login.js"></script>
   </head>
   <body>
     <div class="wrapper">
       <header>
-        <a href="../index.html" class="logo">
-          Task<span class="brand-span">Master</span>
-        </a>
-        <a href="./signup.html" class="btn btn-primary">signup</a>
+        <div class="container container-flex">
+          <a href="../index.html" class="logo">
+            Task<span class="brand-span">Master</span>
+          </a>
+          <a href="./signup.html" class="btn btn-primary">signup</a>
+        </div>
       </header>
       <!-- Alert - for alert message -->
       <article class="alert-container">
@@ -40,6 +43,7 @@
               <input
                 type="email"
                 id="login-email"
+                name="email"
                 placeholder="Enter your Email address"
                 required />
             </div>
@@ -55,18 +59,21 @@
               <input
                 type="password"
                 id="login-password"
+                name="password"
                 placeholder="Enter your password"
                 required />
             </div>
             <div class="submit-container">
               <button type="submit">Login</button>
-              <p>Don't have an account? <a href="/register">signup</a></p>
+              <p>Don't have an account? <a href="signup.html">signup</a></p>
             </div>
           </form>
         </section>
       </main>
       <footer>
-        <p>Made by Judechuks</p>
+        <div class="container">
+          <p>Made by Judechuks</p>
+        </div>
       </footer>
     </div>
   </body>

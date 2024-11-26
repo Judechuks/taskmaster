@@ -15,15 +15,18 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/signup.css" />
+    <script defer src="../js/script.js"></script>
     <script defer src="../js/signup.js"></script>
   </head>
   <body>
     <div class="wrapper">
       <header>
-        <a href="../index.html" class="logo">
-          Task<span class="brand-span">Master</span>
-        </a>
-        <a href="./login.html" class="btn btn-primary">login</a>
+        <div class="container container-flex">
+          <a href="../index.html" class="logo">
+            Task<span class="brand-span">Master</span>
+          </a>
+          <a href="./login.html" class="btn btn-primary">login</a>
+        </div>
       </header>
       <!-- Alert - for alert message -->
       <article class="alert-container">
@@ -42,6 +45,7 @@
               <input
                 type="text"
                 id="first-name"
+                name="firstname"
                 placeholder="Enter your first name"
                 required />
             </div>
@@ -50,6 +54,7 @@
               <input
                 type="text"
                 id="last-name"
+                name="lastname"
                 placeholder="Enter your last name"
                 required />
             </div>
@@ -58,6 +63,7 @@
               <input
                 type="email"
                 id="email"
+                name="email"
                 placeholder="Enter your Email address"
                 required />
             </div>
@@ -93,13 +99,15 @@
             </div>
             <div class="submit-container">
               <button type="submit">Signup</button>
-              <p>Already have an account? <a href="/login">login</a></p>
+              <p>Already have an account? <a href="login.html">login</a></p>
             </div>
           </form>
         </section>
       </main>
       <footer>
-        <p>Made by Judechuks</p>
+        <div class="container">
+          <p>Made by Judechuks</p>
+        </div>
       </footer>
     </div>
   </body>

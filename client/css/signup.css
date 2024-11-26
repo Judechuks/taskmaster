@@ -90,16 +90,21 @@
 }
 
 /* New task form styles */
+.priority-filter,
 .input-field:has(select) {
   position: relative;
 }
-.input-field select {
+.input-field select,
+.task-control-container select {
   cursor: pointer;
   appearance: none; /* removes the default caret icon*/
+  width: 100%;
 }
 /* To add personal dropdown icon */
 .input-field:has(select)::before,
-.input-field:has(select)::after {
+.input-field:has(select)::after,
+.priority-filter::before,
+.priority-filter::after {
   --size: 0.33rem;
   content: "";
   position: absolute;
@@ -109,12 +114,20 @@
   border-right: var(--size) solid transparent;
 }
 .input-field:has(select)::before {
-  border-bottom: var(--size) solid black;
+  border-bottom: var(--size) solid var(--black-clr);
   top: 63%;
 }
+.priority-filter::before {
+  border-bottom: var(--size) solid var(--black-clr);
+  top: 35px;
+}
 .input-field:has(select)::after {
-  border-top: var(--size) solid black;
+  border-top: var(--size) solid var(--black-clr);
   top: 73%;
+}
+.priority-filter::after {
+  border-top: var(--size) solid var(--black-clr);
+  top: 42px;
 }
 .input-field textarea {
   resize: none;
@@ -129,15 +142,19 @@
   font-size: 1rem;
   color: var(--white-clr);
 }
-.save-btn {
+.save-btn,
+.save-edit-btn {
   background-color: #1b6d2e;
 }
-.save-btn:hover {
+.save-btn:hover,
+.save-edit-btn:hover {
   background-color: #155724;
 }
-.cancel-btn {
+.cancel-btn,
+.cancel-edit-btn {
   background-color: #6d1b2e;
 }
-.cancel-btn:hover {
+.cancel-btn:hover,
+.cancel-edit-btn:hover {
   background-color: #571524;
 }
