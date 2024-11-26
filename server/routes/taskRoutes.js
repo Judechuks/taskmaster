@@ -63,17 +63,23 @@ router.get("/", async (req, res) => {
 
 // Search tasks by title or description
 router.get("/search", async (req, res) => {
-  const { query } = req.query;
+  const { query, page = 1, limit = 10 } = req.query;
 
   try {
-    const tasks = await Task.find({
-      $or: [
+    let tasks;
+    const taskQuery = {}; // Initialize an empty query object
+    if (query) {
+      taskQuery.$or = [
         { title: { $regex: query, $options: "i" } }, // Case-insensitive search in title
         { description: { $regex: query, $options: "i" } }, // Case-insensitive search in description
-      ],
-    });
-
-    res.status(200).json({ tasks });
+      ];
+    }
+    // Fetch tasks based on the query and apply pagination
+    tasks = await Task.find(taskQuery)
+      .skip((page - 1) * limit)
+      .limit(Number(limit));
+    const totalTasks = await Task.countDocuments(taskQuery); // Count total tasks matching the query
+    res.status(200).json({ tasks, totalTasks }); // Return tasks and total count
   } catch (error) {
     console.error("Error searching tasks:", error);
     res.status(500).json({ error: "Error searching tasks." });
