@@ -38,7 +38,7 @@ async function loadTasks() {
       `${apiUrl}/api/tasks?page=${currentPage}&limit=${tasksPerPage}`,
       {
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       }
@@ -205,9 +205,13 @@ document
       displayAlertMessage("Please choose task priority and deadline", "danger");
     } else {
       try {
+        const token = localStorage.getItem("taskmasterToken");
         const response = await fetch(`${apiUrl}/api/tasks`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
           body: JSON.stringify({
             title: taskTitle,
             description: taskDescription,
@@ -298,7 +302,7 @@ async function filterTasks() {
 
     const response = await fetch(url, {
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
@@ -326,7 +330,7 @@ async function markTaskAsDone(taskId) {
     const response = await fetch(`${apiUrl}/api/tasks/${taskId}/complete`, {
       method: "PUT",
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
@@ -354,7 +358,7 @@ async function markTaskAsPending(taskId) {
     const response = await fetch(`${apiUrl}/api/tasks/${taskId}/pending`, {
       method: "PUT",
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
@@ -386,7 +390,7 @@ async function deleteTask(taskId) {
     const response = await fetch(`${apiUrl}/api/tasks/${taskId}`, {
       method: "DELETE",
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
@@ -440,7 +444,7 @@ async function editTask(task) {
       const response = await fetch(`${apiUrl}/api/tasks/${task._id}`, {
         method: "PUT",
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({

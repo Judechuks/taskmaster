@@ -61,13 +61,17 @@ router.post("/login", async (req, res) => {
         lastname: user.lastname,
         email: user.email,
       },
-      process.env.JWT_SECRET_KEY,
+      "V32PJUakuHKtVfxl2wFazDD+ItEddSwUzHnSzhWeins=",
       {
         expiresIn: "1h",
+      },
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token });
       }
     );
 
-    res.status(200).json({ token }); // Sending token back to client for authentication
+    // res.status(200).json({ token }); // Sending token back to client for authentication
   } catch (error) {
     res.status(500).json({ error: "Error logging in." });
   }

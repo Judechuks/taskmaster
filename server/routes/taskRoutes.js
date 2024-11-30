@@ -4,8 +4,14 @@ const Task = require("../models/Task"); // Import the Task model
 
 const router = express.Router();
 
+// Middleware to check for JWT in Authorization header
+const {
+  authenticateToken,
+  authorizeTaskAction,
+} = require("../middleware/authMiddleware");
+
 // Create a new task (POST /tasks)
-router.post("/", async (req, res) => {
+router.post("/", authenticateToken, authorizeTaskAction, async (req, res) => {
   const { title, description, deadline, priority, userId } = req.body;
 
   try {
@@ -29,7 +35,7 @@ router.post("/", async (req, res) => {
 });
 
 // Get all tasks (GET /tasks)
-router.get("/", async (req, res) => {
+router.get("/", authenticateToken, async (req, res) => {
   const { page = 1, limit = 10, priority, status } = req.query; // Include both status and priority parameter
 
   try {

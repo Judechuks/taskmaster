@@ -35,11 +35,14 @@ document
       try {
         const response = await fetch(`${apiUrl}/api/auth/login`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({ email, password }),
         });
 
         const data = await response.json();
+        console.log("the response", data);
 
         if (response.ok) {
           localStorage.setItem("taskmasterToken", data.token); // Store token in local storage
