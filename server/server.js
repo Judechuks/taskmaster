@@ -20,6 +20,9 @@ const corsOptions = {
 app.use(cors(corsOptions)); // Enable CORS with specified options
 app.use(bodyParser.json()); // Parse JSON request bodies
 
+// // Middleware to check for JWT in Authorization header
+// const authMiddleware = require("./middleware/authMiddleware");
+
 // Defines info for the root
 app.get("/", (req, res) => {
   res.json({ info: "TaskMaster API" });
